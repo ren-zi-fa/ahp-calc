@@ -1,86 +1,96 @@
 # AHPClient
 
-A TypeScript library implementing the **Analytical Hierarchy Process (AHP)** for decision support systems. It supports pairwise comparison matrices, calculates priority weights, and assesses consistency across matrices. This library is particularly suitable for multi-criteria decision analysis.
+A TypeScript library implementing the **Analytical Hierarchy Process (AHP)** for decision support systems. It supports pairwise comparison matrices, calculates priority weights, and evaluates consistency. Ideal for multi-criteria decision analysis (MCDA).
+
+---
 
 ## ✨ Features
 
-- Parses matrix values written as fractions (e.g., `"1/3"`, `"5"`)
-- Computes priority weights using the geometric mean method
-- Evaluates consistency via lambda max, consistency index (CI), and consistency ratio (CR)
-- Supports multiple matrices for evaluating alternatives against several criteria
+- ✅ Parses values in string format, including fractions (e.g., `"1/3"`, `"5"`)
+- 🧮 Calculates priority weights via the geometric mean method
+- 🔍 Measures consistency: λ<sub>max</sub>, Consistency Index (CI), and Consistency Ratio (CR)
+- 🧠 Supports multiple matrices for criteria and alternatives evaluation
+
+---
 
 ## 📦 Installation
 
-> Not yet available on npm. You can import directly from source:
-```ts
-type MatrixType = string[][];
-[
-  ['1', '1/3', '3'],
-  ['3', '1', '5'],
-  ['1/3', '1/5', '1']
-]
+```bash
+pnpm add github:ren-zi-fa/ahp-renz
+# or
+npm install github:ren-zi-fa/ahp-renz
+# or
+yarn add github:ren-zi-fa/ahp-renz
 
-type AltMatrixes = MatrixType[];
+```
 
-const ahp = new AHPClient();
+### USAGE EXAMPLE
 
-const matrix: MatrixType = [
-  ['1', '1/3', '3'],
-  ['3', '1', '5'],
-  ['1/3', '1/5', '1']
+import { AHPClient } from 'ahp-renz';
+
+const matrix: string[][] = [
+['1', '1/3', '3'],
+['3', '1', '5'],
+['1/3', '1/5', '1']
 ];
 
+const ahp = new AHPClient();
 const result = ahp.calcMatrixResults(matrix);
+
 console.log(result);
-🧠 API Reference
+
+### EXAMPLE MATRIX
+
+[
+['1', '1/3', '3' ],
+['3', '1', '5' ],
+['1/3', '1/5', '1' ]
+]
+
+# 🧠 API Reference
+
 checkIsSlash(str: string): boolean | undefined
-Determines whether a given string is a valid fractional format (e.g., "1/3"). Returns true if valid, false otherwise.
+Check if a string is a valid fraction (e.g., "1/3"). Returns true or false.
 
 convertMatrix(matrix: MatrixType): ConvertedMatrixResult
-Parses a string-based matrix into numerical form. Returns an error flag if any value cannot be parsed.
+Converts string-based matrix into numerical matrix. Handles parsing errors.
 
 calcPriority(matrix: ConvertedMatrix): number[]
-Calculates the priority vector (weights) using the geometric mean method for each row.
+Computes priority weights using the geometric mean for each row.
 
 calcIntensity(matrix: ConvertedMatrix, w: number[]): number[]
-Multiplies each row in the matrix by the priority vector to generate the intensity vector.
+Multiplies each matrix row by its priority to get the intensity vector.
 
 calcFraction(w: number[], intensity: number[]): number[]
-Computes the consistency fraction by dividing each intensity by its corresponding weight.
+Calculates consistency fraction: intensity[i] / weight[i].
 
 calcLambda(fraction: number[]): number
-Computes the average of the consistency fractions, referred to as λ_max.
+Calculates λ<sub>max</sub>: the mean of the consistency fraction vector.
 
 calcInd(lambda: number, length: number): number
-Calculates the Consistency Index (CI) based on λ_max and the size of the matrix.
+Calculates Consistency Index (CI): (λ_max - n) / (n - 1).
 
 calcRelativeCoherence(ind: number, consistInd: number): number
-Computes the Consistency Ratio (CR) by dividing CI by the corresponding Random Index (RI).
+Computes Consistency Ratio (CR): CI / RI.
 
 calcMatrixResults(matrix: MatrixType): CalcMatrixResult | string
-Executes a complete AHP calculation for a single comparison matrix. Returns either the result or an error message.
+Performs full AHP process for a single matrix. Returns result or error.
 
 calcResults(matrixes: AltMatrixes): CalcAllMatrixResult | string
-Performs AHP calculation for multiple matrices (e.g., alternatives across multiple criteria) and computes the global priority vector. Also identifies the most favorable alternative based on weights.
+Calculates global priority vector across multiple matrices.
 
-⚠️ Error Handling
-In the event of malformed inputs (e.g., 1/2, invalid structure)
+## ERROR HANDLING
 
-ts
-Copy
-Edit
 "Something went wrong"
-🛠 Example Output
-ts
-Copy
-Edit
-{
-  w: [0.236, 0.648, 0.116],
-  intensity: [0.743, 1.926, 0.346],
-  fraction: [3.148, 2.972, 2.983],
-  lambda: 3.034,
-  ind: 0.017,
-  coherence: 0.019,
-  consistInd: 0.58
-}
 
+# EXAMPLE OUTPUT
+
+{
+w: [0.236, 0.648, 0.116],
+intensity: [0.743, 1.926, 0.346],
+fraction: [3.148, 2.972, 2.983],
+lambda: 3.034,
+ind: 0.017,
+coherence: 0.019,
+consistInd: 0.58
+}
