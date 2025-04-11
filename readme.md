@@ -16,11 +16,7 @@ A TypeScript library implementing the **Analytical Hierarchy Process (AHP)** for
 ## 📦 Installation
 
 ```bash
-pnpm add github:ren-zi-fa/ahp-renz
-# or
-npm install github:ren-zi-fa/ahp-renz
-# or
-yarn add github:ren-zi-fa/ahp-renz
+npm install ahp-calc
 
 ```
 
