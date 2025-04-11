@@ -1,0 +1,38 @@
+{
+  "name": "ahp-renz",
+  "version": "1.0.0",
+  "description": "AHP (Analytical Hierarchy Process) is a decision-making method that helps break down complex problems into a hierarchy of simpler comparisons. It uses pairwise comparisons and mathematical calculations to rank alternatives based on criteria.",
+  "main": "index.js",
+  "directories": {
+    "lib": "lib"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ren-zi-fa/ahp-renz.git"
+  },
+  "keywords": [
+    "AHP",
+    "DSS"
+  ],
+  "author": "renzi febriandika",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/ren-zi-fa/ahp-renz/issues"
+  },
+  "engines": {
+    "node": ">=20.18.0"
+  },
+  "homepage": "https://github.com/ren-zi-fa/ahp-renz#readme",
+  "packageManager": "pnpm@9.14.2+sha512.6e2baf77d06b9362294152c851c4f278ede37ab1eba3a55fda317a4a17b209f4dbb973fb250a77abc463a341fcb1f17f17cfa24091c4eb319cda0d9b84278387",
+  "devDependencies": {
+    "@types/jest": "^29.5.14",
+    "@types/node": "^22.14.0",
+    "jest": "^29.7.0",
+    "rimraf": "^6.0.1",
+    "ts-jest": "^29.3.1",
+    "typescript": "^5.8.3"
+  }
+}
