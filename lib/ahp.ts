@@ -9,7 +9,7 @@ import {
 } from "./types";
 
 export class AHPClient {
-  static checkIsSlash = (str: string): Boolean | undefined => {
+  private checkIsSlash = (str: string): Boolean | undefined => {
     if (str.length > 2) {
       if (str.includes("/")) {
         if (str[0] !== "/" && str[2] !== "/") return true;
@@ -22,7 +22,7 @@ export class AHPClient {
     }
   };
 
-  static convertMatrix = (matrix: MatrixType): ConvertedMatrixResult => {
+  private convertMatrix = (matrix: MatrixType): ConvertedMatrixResult => {
     const convertedMatrix = [];
     let isError = false;
 
@@ -49,7 +49,7 @@ export class AHPClient {
     return { convertedMatrix, isError };
   };
 
-  static calcPriority = (matrix: ConvertedMatrix): number[] => {
+  private calcPriority = (matrix: ConvertedMatrix): number[] => {
     const u = [];
     const w = [];
 
@@ -67,7 +67,7 @@ export class AHPClient {
     return w;
   };
 
-  static calcIntensity = (matrix: ConvertedMatrix, w: number[]): number[] => {
+  private calcIntensity = (matrix: ConvertedMatrix, w: number[]): number[] => {
     const intensity = [];
 
     for (let i = 0; i < matrix.length; i++) {
@@ -81,7 +81,7 @@ export class AHPClient {
     return intensity;
   };
 
-  static calcFraction = (w: number[], intensity: number[]): number[] => {
+  private calcFraction = (w: number[], intensity: number[]): number[] => {
     const fraction = [];
 
     for (let i = 0; i < w.length; i++) {
@@ -91,7 +91,7 @@ export class AHPClient {
     return fraction;
   };
 
-  static calcLambda = (fraction: number[]): number => {
+  private calcLambda = (fraction: number[]): number => {
     const lambda =
       fraction.reduce((sum: number, record: number) => sum + record, 0) /
       fraction.length;
@@ -99,15 +99,15 @@ export class AHPClient {
     return Number(lambda.toFixed(6));
   };
 
-  static calcInd = (lambda: number, length: number): number => {
+  private calcInd = (lambda: number, length: number): number => {
     return Number(((lambda - length) / (length - 1)).toFixed(6));
   };
 
-  static calcRelativeCoherence = (ind: number, consistInd: number): number => {
+  private calcRelativeCoherence = (ind: number, consistInd: number): number => {
     return Number((ind / consistInd).toFixed(6));
   };
 
-  static calcMatrixResults = (
+  private calcMatrixResults = (
     matrix: MatrixType
   ): CalcMatrixResult | string => {
     const { convertedMatrix, isError } = this.convertMatrix(matrix);
@@ -131,7 +131,8 @@ export class AHPClient {
     let isError = false;
 
     const result = matrixes.map((matrix) => {
-      const res = this.calcMatrixResults(matrix);
+      const instance = new AHPClient();
+      const res = instance.calcMatrixResults(matrix);
 
       if (typeof res === "string") {
         isError = true;
