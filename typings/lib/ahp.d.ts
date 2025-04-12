@@ -1,14 +1,13 @@
-import { AHPClientBlueprint } from "./blueprint";
 import { AltMatrixes, CalcAllMatrixResult, CalcMatrixResult, ConvertedMatrix, ConvertedMatrixResult, MatrixType } from "./types";
-export declare class AHPClient implements AHPClientBlueprint {
-    checkIsSlash: (str: string) => Boolean | undefined;
-    convertMatrix: (matrix: MatrixType) => ConvertedMatrixResult;
-    calcPriority: (matrix: ConvertedMatrix) => number[];
-    calcIntensity: (matrix: ConvertedMatrix, w: number[]) => number[];
-    calcFraction: (w: number[], intensity: number[]) => number[];
-    calcLambda: (fraction: number[]) => number;
-    calcInd: (lambda: number, length: number) => number;
-    calcRelativeCoherence: (ind: number, consistInd: number) => number;
-    calcMatrixResults: (matrix: MatrixType) => CalcMatrixResult | string;
-    calcResults: (matrixes: AltMatrixes) => CalcAllMatrixResult | string;
+export declare class AHPClient {
+    static checkIsSlash: (str: string) => Boolean | undefined;
+    static convertMatrix: (matrix: MatrixType) => ConvertedMatrixResult;
+    static calcPriority: (matrix: ConvertedMatrix) => number[];
+    static calcIntensity: (matrix: ConvertedMatrix, w: number[]) => number[];
+    static calcFraction: (w: number[], intensity: number[]) => number[];
+    static calcLambda: (fraction: number[]) => number;
+    static calcInd: (lambda: number, length: number) => number;
+    static calcRelativeCoherence: (ind: number, consistInd: number) => number;
+    static calcMatrixResults: (matrix: MatrixType) => CalcMatrixResult | string;
+    static calcResults: (matrixes: AltMatrixes) => CalcAllMatrixResult | string;
 }
