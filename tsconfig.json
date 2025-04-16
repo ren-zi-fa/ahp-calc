@@ -12,5 +12,5 @@
     "forceConsistentCasingInFileNames": true,
     "outDir": "dist"
   },
-  "include": ["lib", "test"]
+  "include": ["lib/**/*", "test"]
 }
