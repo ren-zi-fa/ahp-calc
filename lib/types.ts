@@ -40,13 +40,14 @@ type Weights = number[];
  * // Matriks ter-normalkan
  * const normalized: Normalize = [[0.1, 0.2], [0.3, 0.4]];
  */
-type Normalize = number[][];
-
+type NormalizeCrit = number[][];
+type NormalizeAlt = number[][][];
+type StrAlternatifMatriks = string[][][];
 type CritMatriks = number[][];
 type Bobot = number[];
 
 type AHPCritResult = {
-  convertedMatrix: number[][];
+  originalMatrix: number[][];
   normalizedMatrix: number[][];
   weightsCriteria: number[];
   lamdaMax: number;
@@ -59,10 +60,12 @@ type AHPCritResult = {
 };
 export type {
   Matrix,
-  Normalize,
+  NormalizeCrit,
   NestedStringMatrix,
   Weights,
   CritMatriks,
   Bobot,
   AHPCritResult,
+  StrAlternatifMatriks,
+  NormalizeAlt,
 };

@@ -10,7 +10,7 @@ import {
   CritMatriks,
   Matrix,
   NestedStringMatrix,
-  Normalize,
+  NormalizeCrit,
   Weights,
 } from "./types";
 import { convertCell } from "./utils";
@@ -80,56 +80,37 @@ export class AHPCrit {
   }
 
   /**
-   * Menghitung total setiap kolom dari sebuah matriks (bisa lebih dari 2D).
-   * @param matrix Matriks angka (bisa lebih dari 2D)
-   * @returns Array total dari tiap kolom, atau array dari total kolom untuk setiap matriks pada dimensi lebih tinggi
+   * Menghitung total dari setiap kolom pada matriks 2D.
+   * @param matrix Matriks angka 2D
+   * @returns Array total dari tiap kolom
    */
-  public static countTotalEachColumn(matrix: Matrix): number[] | number[][] {
-    // Pastikan matrix bukan array kosong
-    if (!Array.isArray(matrix) || matrix.length === 0) {
-      throw new Error("Matrix is empty or invalid.");
+  public static countTotalEachColumn(matrix: number[][]): number[] {
+    if (
+      !Array.isArray(matrix) ||
+      matrix.length === 0 ||
+      !Array.isArray(matrix[0])
+    ) {
+      throw new Error("Matrix must be a non-empty 2D array.");
     }
 
-    // Jika matriks adalah 2D
-    if (Array.isArray(matrix[0])) {
-      if (Array.isArray(matrix[0][0])) {
-        // Jika matriks lebih dari 2D, rekursi untuk menangani
-        return matrix.map((subMatrix) => {
-          if (Array.isArray(subMatrix[0])) {
-            return this.countTotalEachColumn(subMatrix as Matrix) as number[];
-          } else {
-            return subMatrix as number[];
-          }
-        });
-      } else {
-        // Matriks 2D, langsung hitung total kolomnya
-        const totals: number[] = [];
-        for (let col = 0; col < matrix[0].length; col++) {
-          let total = 0;
-          for (let row = 0; row < matrix.length; row++) {
-            // Pastikan kita hanya menjumlahkan angka
-            if (typeof matrix[row][col] === "number") {
-              const value = matrix[row][col];
-              if (typeof value === "number") {
-                total += value;
-              } else {
-                throw new Error(
-                  `Element at matrix[${row}][${col}] is not a number.`
-                );
-              }
-            } else {
-              throw new Error(
-                `Element at matrix[${row}][${col}] is not a number.`
-              );
-            }
-          }
-          totals.push(parseFloat(total.toFixed(3))); // Pembulatan ke 3 desimal
-        }
-        return totals;
+    const columnCount = matrix[0].length;
+    const totals = new Array(columnCount).fill(0);
+
+    for (let row = 0; row < matrix.length; row++) {
+      if (matrix[row].length !== columnCount) {
+        throw new Error(`Row ${row} has inconsistent column count.`);
       }
-    } else {
-      throw new Error("Matrix is not in the correct format.");
+
+      for (let col = 0; col < columnCount; col++) {
+        const value = matrix[row][col];
+        if (typeof value !== "number" || isNaN(value)) {
+          throw new Error(`Invalid number at matrix[${row}][${col}].`);
+        }
+        totals[col] += value;
+      }
     }
+
+    return totals.map((total) => parseFloat(total.toFixed(3)));
   }
 
   /**
@@ -137,7 +118,7 @@ export class AHPCrit {
    * @param matrix Matriks angka
    * @returns Matriks ternormalisasi
    */
-  public static normalizeMatrix(matrix: number[][]): Normalize {
+  public static normalizeMatrix(matrix: number[][]): NormalizeCrit {
     const columnSums = matrix[0].map((_, colIndex) =>
       matrix.reduce((sum, row) => sum + row[colIndex], 0)
     );
@@ -152,11 +133,11 @@ export class AHPCrit {
   /**
    * Menghitung bobot kriteria atau eignvector dari matriks ternormalisasi.
    * simbol (w)
-   * @param normalizedMatrix Matriks ternormalisasi
+   * @param Matrix2D
    * @returns Array bobot lokal
    */
-  public static calculateCriteriaWeight(normalizedMatrix: Normalize): Weights {
-    return normalizedMatrix.map((row) => {
+  public static calculateCriteriaWeight(Matrix2D: number[][]): Weights {
+    return Matrix2D.map((row) => {
       const sum = row.reduce((a, b) => a + b, 0);
       return parseFloat((sum / row.length).toFixed(3));
     });

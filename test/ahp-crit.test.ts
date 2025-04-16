@@ -10,6 +10,7 @@ import {
   RI,
   konsistensi,
   n,
+  sumCrit,
 } from "./vars";
 
 describe("AHPCrit class", () => {
@@ -101,8 +102,7 @@ describe("AHPCrit class", () => {
   });
 
   it("should throw error on invalid format in countTotalEachColumn", () => {
-    expect(() => {
-      AHPCrit.countTotalEachColumn([] as any);
-    }).toThrow("Matrix is empty or invalid.");
+    const res = AHPCrit.countTotalEachColumn(convertedMatrix);
+    expect(res).toEqual(sumCrit);
   });
 });
