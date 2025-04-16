@@ -13,6 +13,7 @@ import {
   Normalize,
   Weights,
 } from "./types";
+import { convertCell } from "./utils";
 
 /**
  * Kelas utama untuk mengimplementasikan metode Analytic Hierarchy Process (AHP).
@@ -39,28 +40,12 @@ export class AHPCrit {
   }
 
   /**
-   * Mengubah nilai sel string (misalnya "1/3") menjadi number.
-   * @param cell Nilai string yang merepresentasikan rasio
-   * @returns Nilai numerik
-   */
-  private static convertCell(cell: string): number {
-    const roundTo3Decimals = (num: number) => Math.round(num * 1000) / 1000;
-
-    if (cell.includes("/")) {
-      const [num, denom] = cell.split("/").map(Number);
-      return roundTo3Decimals(num / denom);
-    }
-
-    return roundTo3Decimals(parseFloat(cell));
-  }
-
-  /**
    * Mengubah matriks string bertingkat (nested) menjadi matriks number.
    * @param matrix Matriks string atau nested matrix
    * @returns Matriks angka
    */
   public static convertStringMatrixToNumber(matrix: NestedStringMatrix): any {
-    if (typeof matrix === "string") return this.convertCell(matrix);
+    if (typeof matrix === "string") return convertCell(matrix);
     if (Array.isArray(matrix)) {
       return matrix.map((item) => this.convertStringMatrixToNumber(item));
     }

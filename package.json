@@ -1,6 +1,6 @@
 {
   "name": "ahp-calc",
-  "version": "2.0.0",
+  "version": "1.2.0",
   "description": "AHP (Analytical Hierarchy Process) is a decision-making method that helps break down complex problems into a hierarchy of simpler comparisons. It uses pairwise comparisons and mathematical calculations to rank alternatives based on criteria.",
   "main": "dist/lib/ahp.js",
   "files": [
@@ -17,7 +17,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/ren-zi-fa/ahp-renz.git"
+    "url": "git+https://github.com/ren-zi-fa/ahp-calc.git"
   },
   "keywords": [
     "AHP",
@@ -28,12 +28,12 @@
   "author": "renzi febriandika",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/ren-zi-fa/ahp-renz/issues"
+    "url": "https://github.com/ren-zi-fa/ahp-calc/issues"
   },
   "engines": {
     "node": ">=20.18.0"
   },
-  "homepage": "https://github.com/ren-zi-fa/ahp-renz#readme",
+  "homepage": "https://github.com/ren-zi-fa/ahp-calc#readme",
   "packageManager": "pnpm@9.14.2+sha512.6e2baf77d06b9362294152c851c4f278ede37ab1eba3a55fda317a4a17b209f4dbb973fb250a77abc463a341fcb1f17f17cfa24091c4eb319cda0d9b84278387",
   "devDependencies": {
     "@types/jest": "^29.5.14",
