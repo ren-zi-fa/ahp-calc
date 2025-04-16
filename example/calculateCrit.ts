@@ -7,6 +7,7 @@ const critMatriks: string[][] = [
   ["1/7", "1/5", "1/3", "1", "2"],
   ["1/7", "1/5", "1/3", "1/2", "1"],
 ];
+
 const {
   normalizedMatrix,
   CI,

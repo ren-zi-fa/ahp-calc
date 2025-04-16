@@ -4,6 +4,10 @@ A TypeScript Module implementing the **Analytical Hierarchy Process (AHP)** for 
 
 > ⚠️ **WARNING:** This library does **not** support sub-criteria (yet).
 
+### requirements
+
+matriksCriteriaInput and matriksAlternatifInput
+
 ## 📦 Installation
 
 ```bash

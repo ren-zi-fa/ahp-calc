@@ -1,23 +1,28 @@
 import { calculateAltMatrix } from "../lib/method";
-
 const altMatrix: string[][][] = [
   [
-    ["1", "3", "5", "1/3"],
-    ["1/3", "1", "5/3", "1/9"],
-    ["1/5", "3/5", "1", "1/5"],
-    ["3", "9", "5", "1"],
+    ["1", "3", "2", "1/3"],
+    ["1/3", "1", "1/3", "1/5"],
+    ["1/2", "3", "1", "1/3"],
+    ["3", "5", "3", "1"],
   ],
   [
-    ["1", "3", "5", "1/3"],
-    ["1/3", "1", "5/3", "1/9"],
-    ["1/5", "3/5", "1", "1/7"],
-    ["3", "9", "7", "1"],
+    ["1", "3", "5", "2"],
+    ["1/3", "1", "3", "1/3"],
+    ["1/5", "1/3", "1", "1/5"],
+    ["1/2", "3", "5", "1"],
   ],
   [
-    ["1", "3", "5", "1/3"],
-    ["1/3", "1", "2", "1/9"],
-    ["1/5", "1/2", "1", "1/5"],
-    ["3", "9", "5", "1"],
+    ["1", "1/3", "1/5", "1/5"],
+    ["3", "1", "1/3", "1/3"],
+    ["5", "3", "1", "2"],
+    ["5", "3", "1/2", "1"],
+  ],
+  [
+    ["1", "1/3", "2", "1/3"],
+    ["3", "1", "3", "2"],
+    ["1/2", "1/3", "1", "1/3"],
+    ["3", "1/2", "3", "1"],
   ],
 ];
 
@@ -25,14 +30,13 @@ const {
   CR,
   Ci,
   RI,
-  bobotPriority,
   isConsistent,
   lamdaMax,
   n,
   normalized,
   originalMatrix,
   sumAlt,
-  weight,
+  weightAlt,
 } = calculateAltMatrix(altMatrix);
 
 console.log("===== Hasil Perhitungan AHP Alternatif =====\n");
@@ -58,16 +62,8 @@ sumAlt.forEach((sum, i) => {
   );
 });
 
-console.log("\n⚖️ Bobot Prioritas dari Matriks Normalisasi:");
-bobotPriority.forEach((bobot, i) => {
-  console.log(
-    `  - Bobot [${i}]:`,
-    bobot.map((v) => v.toFixed(3))
-  );
-});
-
-console.log("\n📉 Bobot dari Matriks Asli:");
-weight.forEach((w, i) => {
+console.log("\n📉 Bobot dari Matriks Alt:");
+weightAlt.forEach((w, i) => {
   console.log(
     `  - Weight [${i}]:`,
     w.map((v) => v.toFixed(3))

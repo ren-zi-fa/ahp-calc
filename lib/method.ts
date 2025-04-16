@@ -68,9 +68,8 @@ function calculateAltMatrix(matrix: string[][][] | number[][][]) {
 
   const normalized = AHPAlt.normalizeMatrixAlt(originalMatrix);
   const sumAlt = AHPAlt.countTotalAlterEachColumn(originalMatrix);
-  const bobotPriority = AHPAlt.calculateCriteriaWeightAlt(normalized);
-  const weight = AHPAlt.calculateCriteriaWeightAlt(originalMatrix);
-  const lamdaMax = AHPAlt.calculateLambdaMax(originalMatrix, weight);
+  const weightAlt = AHPAlt.calculateCriteriaWeightAlt(originalMatrix);
+  const lamdaMax = AHPAlt.calculateLambdaMax(originalMatrix, weightAlt);
   const n = AHPAlt.getMatrixOrdersForAlt(originalMatrix);
   const Ci = AHPAlt.calculateConsistencyIndexForAlt(lamdaMax, n);
 
@@ -82,8 +81,7 @@ function calculateAltMatrix(matrix: string[][][] | number[][][]) {
     originalMatrix,
     normalized,
     sumAlt,
-    bobotPriority,
-    weight,
+    weightAlt,
     lamdaMax,
     n,
     Ci,
@@ -92,4 +90,28 @@ function calculateAltMatrix(matrix: string[][][] | number[][][]) {
     isConsistent: CR.map((cr) => cr.isConsistent),
   };
 }
-export { calculateAltMatrix, calculcateCritMatrix };
+
+function calculateCompositeWeights(
+  alternatives: number[][],
+  criteriaWeights: number[]
+): number[] {
+  // Normalisasi Matriks
+  const columnSums = alternatives[0].map((_, colIndex) => {
+    return Math.sqrt(
+      alternatives.reduce((sum, row) => sum + Math.pow(row[colIndex], 2), 0)
+    );
+  });
+
+  const normalizedMatrix = alternatives.map((row) =>
+    row.map((value, colIndex) => value / columnSums[colIndex])
+  );
+
+  // Menghitung Composite Weight untuk Setiap Alternatif
+  const compositeWeights = normalizedMatrix.map((row) =>
+    row.reduce((sum, value, index) => sum + value * criteriaWeights[index], 0)
+  );
+
+  return compositeWeights;
+}
+
+export { calculateAltMatrix, calculcateCritMatrix, calculateCompositeWeights };
