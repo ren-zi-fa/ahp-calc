@@ -35,10 +35,10 @@ npm install ahp-calc
 ## Main Feature
 
 - Support for Pairwise Comparison Matrices:
-  The library allows you to create and process pairwise comparison  matrices for both criteria and alternatives.
+  The library allows you to create and process pairwise comparison matrices for both criteria and alternatives.
 
 - Matrix Normalization:
-  Supports normalization of both criteria and alternatives  matrices  to calculate relative priorities.
+  Supports normalization of both criteria and alternatives matrices to calculate relative priorities.
 
 - Weight Calculation (bobot priority):
   It calculates local priority weights (eigenvectors) for criteria and alternatives using the normalized matrices, and it can compute the global weights across all levels.
@@ -47,7 +47,7 @@ npm install ahp-calc
   Includes functionality for consistency checking using λmax (Lamda Max), Consistency Index (CI), and Consistency Ratio (CR) to evaluate whether the matrix comparisons are consistent.
 
 - Converts Nested String Matrices to Numeric Matrices:
-The library supports converting string-based matrices (nested) into numeric matrices, making it easier to process data in AHP.
+  The library supports converting string-based matrices (nested) into numeric matrices, making it easier to process data in AHP.
 
 - Priority Weights Calculation for Alternatives:
   For multi-alternative problems, the library supports calculating priority weights for alternatives against each criterion.
@@ -60,7 +60,7 @@ No Support for Sub-criteria:
 
 ## Example Usage
 
-You can start using the library by first creating an instance of the AHPCrit or AHPAlt class depending on whether you're working with criteria or alternatives.
+you can start directly using function to calculate the pairwaise
 
 for example to calculate Criteria Pairwise Comparison Matrices:
 
@@ -135,4 +135,48 @@ const altMatrix: string[][][] = [
 const { normalized } = calculateAltMatrix(altMatrix);
 
 console.log(normalized);
+```
+
+Or you can start using the library by first creating an instance of the AHPCrit or AHPAlt class depending on whether you're working with criteria or alternatives.
+
+```typescript
+import { AHPCrit } from "ahp-calc";
+
+const critMatrix = [
+  [
+    [1.0, 3.0, 0.2],
+    [0.3333, 1.0, 0.1429],
+    [5.0, 7.0, 1.0],
+  ],
+];
+
+const weights = AHPCrit.calculateCriteriaWeight(critMatrix);
+console.log(weights);
+```
+
+To count each column in all matriks for alternatives:
+
+```typescript
+import { AHPAlt } from "ahp-calc";
+
+const altMatrix3D = [
+  [
+    [1.0, 3.0, 0.5],
+    [0.3333, 1.0, 0.1429],
+    [2.0, 7.0, 1.0],
+  ],
+  [
+    [1.0, 3.0, 0.5],
+    [0.3333, 1.0, 0.1429],
+    [2.0, 7.0, 1.0],
+  ],
+  [
+    [1.0, 3.0, 0.5],
+    [0.3333, 1.0, 0.1429],
+    [2.0, 7.0, 1.0],
+  ],
+];
+
+const sumAlt = AHPAlt.countTotalAlterEachColumn(originalMatrix);
+console.log(sumAlt);
 ```
