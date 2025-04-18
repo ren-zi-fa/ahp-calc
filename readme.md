@@ -181,7 +181,7 @@ const sumAlt = AHPAlt.countTotalAlterEachColumn(originalMatrix);
 console.log(sumAlt);
 ```
 
-Rangks alternatif
+Ranks alternatif
 
 ```typescript
 const { weightsCriteria } = calculcateCritMatrix(critMatriks);
