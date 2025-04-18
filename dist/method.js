@@ -71,13 +71,12 @@ function calculateAltMatrix(matrix) {
         isConsistent: CR.map((cr) => cr.isConsistent),
     };
 }
-function calculateCompositeWeights(alternatives, criteriaWeights) {
-    // Normalisasi Matriks
-    const columnSums = alternatives[0].map((_, colIndex) => {
-        return Math.sqrt(alternatives.reduce((sum, row) => sum + Math.pow(row[colIndex], 2), 0));
+function calculateCompositeWeights(alternativesWeights, criteriaWeights) {
+    const numAlternatives = alternativesWeights[0].length;
+    const transposed = Array.from({ length: numAlternatives }, (_, i) => alternativesWeights.map((row) => row[i]));
+    const compositeWeights = transposed.map((alt) => {
+        const rawScore = alt.reduce((sum, val, idx) => sum + val * criteriaWeights[idx], 0);
+        return parseFloat(rawScore.toFixed(3));
     });
-    const normalizedMatrix = alternatives.map((row) => row.map((value, colIndex) => value / columnSums[colIndex]));
-    // Menghitung Composite Weight untuk Setiap Alternatif
-    const compositeWeights = normalizedMatrix.map((row) => row.reduce((sum, value, index) => sum + value * criteriaWeights[index], 0));
     return compositeWeights;
 }

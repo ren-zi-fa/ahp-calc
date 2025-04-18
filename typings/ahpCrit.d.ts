@@ -4,7 +4,7 @@
  *
  * @module AHP
  */
-import { Bobot, CritMatriks, NestedStringMatrix, NormalizeCrit, Weights } from "./types";
+import { Bobot, CritMatriks, NestedStringMatrix } from "./types";
 /**
  * Kelas utama untuk mengimplementasikan metode Analytic Hierarchy Process (AHP).
  */
@@ -38,14 +38,14 @@ export declare class AHPCrit {
      * @param matrix Matriks angka
      * @returns Matriks ternormalisasi
      */
-    static normalizeMatrix(matrix: number[][]): NormalizeCrit;
+    static normalizeMatrix(matrix: number[][]): number[][];
     /**
      * Menghitung bobot kriteria atau eignvector dari matriks ternormalisasi.
      * simbol (w)
-     * @param Matrix2D
-     * @returns Array bobot lokal
+     * @param normalize
+     * @returns Array priority
      */
-    static calculateCriteriaWeight(Matrix2D: number[][]): Weights;
+    static calculateCriteriaWeight(normalize: number[][]): number[];
     /**
      * Menghitung nilai λ maks (Lamda Max) untuk matriks perbandingan berpasangan menggunakan metode AHP.
      *

@@ -96,26 +96,29 @@ export class AHPAlt {
       return totals.map((total) => parseFloat(total.toFixed(3))); // Pembulatan ke 3 desimal
     });
   }
-
   /**
    * Menghitung bobot prioritas (priority vector) untuk setiap alternatif dalam matriks 3D.
    *
    * Untuk setiap matriks 2D dalam matriks 3D, fungsi ini menghitung rata-rata dari setiap baris
    * sebagai representasi bobot lokal (eigen vector) dari alternatif terhadap setiap kriteria.
    *
-   * @param matrix3D - Matriks 3 dimensi (number[][][]) yang merepresentasikan
-   *                   perbandingan berpasangan antar alternatif untuk setiap kriteria.
-   *                   Dimensi: [jumlahKriteria][jumlahAlternatif][jumlahAlternatif]
+   * @param normalize - matriks yg sudah di normalisasi
    * @returns Array 2 dimensi (number[][]) yang berisi bobot prioritas untuk setiap alternatif
    *          dalam tiap kriteria. Dimensi: [jumlahKriteria][jumlahAlternatif]
    */
-  public static calculateCriteriaWeightAlt(matrix3D: number[][][]): number[][] {
-    return matrix3D.map((matrix2D) =>
-      matrix2D.map((row) => {
+  public static calculateCriteriaWeightAlt(
+    normalize: number[][][]
+  ): number[][] {
+    return normalize.map((criteriaMatrix) => {
+      const weights = criteriaMatrix.map((row) => {
         const sum = row.reduce((a, b) => a + b, 0);
-        return parseFloat((sum / row.length).toFixed(3));
-      })
-    );
+        return sum / row.length;
+      });
+
+      // Optional: Normalisasi agar total bobot = 1 untuk tiap kriteria
+      const total = weights.reduce((a, b) => a + b, 0);
+      return weights.map((w) => w / total);
+    });
   }
 
   /**

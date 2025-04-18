@@ -1,6 +1,6 @@
 {
   "name": "ahp-calc",
-  "version": "1.2.2",
+  "version": "1.2.5",
   "description": "AHP (Analytical Hierarchy Process) is a decision-making method that helps break down complex problems into a hierarchy of simpler comparisons. It uses pairwise comparisons and mathematical calculations to rank alternatives based on criteria.",
   "main": "dist/index.js",
   "files": [
@@ -37,10 +37,10 @@
   "packageManager": "pnpm@9.14.2+sha512.6e2baf77d06b9362294152c851c4f278ede37ab1eba3a55fda317a4a17b209f4dbb973fb250a77abc463a341fcb1f17f17cfa24091c4eb319cda0d9b84278387",
   "devDependencies": {
     "@types/jest": "^29.5.14",
-    "@types/node": "^22.14.0",
+    "@types/node": "^22.14.1",
     "jest": "^29.7.0",
     "rimraf": "^6.0.1",
-    "ts-jest": "^29.3.1",
+    "ts-jest": "^29.3.2",
     "ts-node": "^10.9.2",
     "typedoc": "^0.28.2",
     "typescript": "^5.8.3"
