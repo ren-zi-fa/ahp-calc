@@ -15,5 +15,5 @@ declare function calculateAltMatrix(matrix: string[][][] | number[][][]): {
     RI: number;
     isConsistent: boolean[];
 };
-declare function calculateCompositeWeights(alternatives: number[][], criteriaWeights: number[]): number[];
+declare function calculateCompositeWeights(alternativesWeights: number[][], criteriaWeights: number[]): number[];
 export { calculateAltMatrix, calculcateCritMatrix, calculateCompositeWeights };

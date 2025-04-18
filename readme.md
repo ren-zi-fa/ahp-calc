@@ -159,7 +159,7 @@ To count each column in all matriks for alternatives:
 ```typescript
 import { AHPAlt } from "ahp-calc";
 
-const altMatrix3D = [
+const originalMatrix = [
   [
     [1.0, 3.0, 0.5],
     [0.3333, 1.0, 0.1429],
@@ -179,4 +179,13 @@ const altMatrix3D = [
 
 const sumAlt = AHPAlt.countTotalAlterEachColumn(originalMatrix);
 console.log(sumAlt);
+```
+
+Rangks alternatif
+
+```typescript
+const { weightsCriteria } = calculcateCritMatrix(critMatriks);
+const { weightAlt } = calculateAltMatrix(altMatrix);
+const res = calculateCompositeWeights(weightAlt, weightsCriteria);
+console.log(res);
 ```

@@ -29,13 +29,11 @@ export declare class AHPAlt {
      * Untuk setiap matriks 2D dalam matriks 3D, fungsi ini menghitung rata-rata dari setiap baris
      * sebagai representasi bobot lokal (eigen vector) dari alternatif terhadap setiap kriteria.
      *
-     * @param matrix3D - Matriks 3 dimensi (number[][][]) yang merepresentasikan
-     *                   perbandingan berpasangan antar alternatif untuk setiap kriteria.
-     *                   Dimensi: [jumlahKriteria][jumlahAlternatif][jumlahAlternatif]
+     * @param normalize - matriks yg sudah di normalisasi
      * @returns Array 2 dimensi (number[][]) yang berisi bobot prioritas untuk setiap alternatif
      *          dalam tiap kriteria. Dimensi: [jumlahKriteria][jumlahAlternatif]
      */
-    static calculateCriteriaWeightAlt(matrix3D: number[][][]): number[][];
+    static calculateCriteriaWeightAlt(normalize: number[][][]): number[][];
     /**
      * Menghitung lambda max dari array 3D dan bobot prioritasnya.
      * @param originalMatrix Matriks perbandingan berpasangan dalam 3D (number[][][])

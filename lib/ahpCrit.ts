@@ -118,14 +118,14 @@ export class AHPCrit {
    * @param matrix Matriks angka
    * @returns Matriks ternormalisasi
    */
-  public static normalizeMatrix(matrix: number[][]): NormalizeCrit {
+  public static normalizeMatrix(matrix: number[][]): number[][] {
     const columnSums = matrix[0].map((_, colIndex) =>
       matrix.reduce((sum, row) => sum + row[colIndex], 0)
     );
 
     return matrix.map((row) =>
       row.map((value, colIndex) =>
-        parseFloat((value / columnSums[colIndex]).toFixed(3))
+        Number((value / columnSums[colIndex]).toFixed(4))
       )
     );
   }
@@ -133,14 +133,18 @@ export class AHPCrit {
   /**
    * Menghitung bobot kriteria atau eignvector dari matriks ternormalisasi.
    * simbol (w)
-   * @param Matrix2D
-   * @returns Array bobot lokal
+   * @param normalize
+   * @returns Array priority
    */
-  public static calculateCriteriaWeight(Matrix2D: number[][]): Weights {
-    return Matrix2D.map((row) => {
+  public static calculateCriteriaWeight(normalize: number[][]): number[] {
+    const weights = normalize.map((row) => {
       const sum = row.reduce((a, b) => a + b, 0);
-      return parseFloat((sum / row.length).toFixed(3));
+      return Number((sum / row.length).toFixed(3));
     });
+
+    // Optional: Normalisasi ulang untuk menghindari error floating point
+    const total = weights.reduce((a, b) => a + b, 0);
+    return weights.map((w) => Number((w / total).toFixed(4)));
   }
 
   /**

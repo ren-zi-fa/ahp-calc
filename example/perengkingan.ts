@@ -41,4 +41,5 @@ const altMatrix: string[][][] = [
 const { weightsCriteria } = calculcateCritMatrix(critMatriks);
 const { weightAlt } = calculateAltMatrix(altMatrix);
 const res = calculateCompositeWeights(weightAlt, weightsCriteria);
+console.log(res);
 
