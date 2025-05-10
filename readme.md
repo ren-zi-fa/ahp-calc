@@ -67,7 +67,7 @@ for example to calculate Criteria Pairwise Comparison Matrices:
 ```typescript
 import { calculcateCritMatrix } from "ahp-calc";
 
-const critMatriks: string[][] = [
+const critMatriks = [
   ["1", "3", "5", "7", "7"],
   ["1/3", "1", "3", "5", "5"],
   ["1/5", "1/3", "1", "3", "3"],
@@ -105,7 +105,7 @@ for example to calculate alternatif Pairwise Comparison Matrices and if you just
 
 ```typescript
 import { calculateAltMatrix } from "ahp-calc";
-const altMatrix: string[][][] = [
+const altMatrix[] = [
   [
     ["1", "3", "2", "1/3"],
     ["1/3", "1", "1/3", "1/5"],

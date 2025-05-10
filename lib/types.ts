@@ -58,7 +58,7 @@ type AHPCritResult = {
   konsistensi: string;
   sumCrit: number[] | number[][];
 };
-export type {
+export  {
   Matrix,
   NormalizeCrit,
   NestedStringMatrix,
